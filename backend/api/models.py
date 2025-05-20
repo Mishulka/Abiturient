@@ -11,3 +11,21 @@ class User(AbstractUser):
     
     def __str__(self):
         return f"{self.username} ({self.role})"
+    
+class Application(models.Model):
+    STATUS_CHOICES = [
+        ('new', 'В обработке'),
+        ('accepted', 'Принят'),
+        ('rejected', 'Отклонён'),
+    ]
+    
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    full_name = models.CharField(max_length=100)
+    birth_date = models.DateField()
+    ege_score = models.PositiveIntegerField()
+    passport_scan = models.FileField(upload_to ='passports/')
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='new')
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return f"{self.user.username} - {self.get_status_display()}"

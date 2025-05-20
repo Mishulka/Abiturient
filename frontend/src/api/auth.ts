@@ -15,4 +15,4 @@ export const getMe = (token: string) =>
     headers: {
       Authorization: `Bearer ${token}`
     }
-  })
+})
