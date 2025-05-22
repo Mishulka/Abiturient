@@ -15,9 +15,10 @@ const ProfilePage = observer(() => {
   useEffect(() => {
     const fetchApplications = async () => {
       try {
-        const res = await axios.get("http://localhost:8000/applications/", {
+        console.log("Токен:", userStore.accessToken);
+        const res = await axios.get("http://localhost:8000/api/applications/my/", {
           headers: {
-            Authorization: `Bearer ${userStore.accessToken}`,
+            Authorization: `Bearer ${userStore.accessToken?.trim()}`,
           },
         })
         setApplications(res.data)

@@ -1,12 +1,14 @@
 import { useState } from "react";
 import axios from "axios";
 import { userStore } from "../store/user"
+import { useNavigate } from "react-router-dom"
 
 export default function SubmitApplication() {
     const [fullName, setFullName] = useState("");
     const [birthDate, setBirthDate] = useState("");
     const [egeScore, setEgeScore] = useState("");
     const [passport, setPassport] = useState<File | null>(null);
+    const navigate = useNavigate()
 
     const handleSubmit = async () => {
         event?.preventDefault();
@@ -26,6 +28,7 @@ export default function SubmitApplication() {
                     }
                 })
                 console.log("Создана заявка:", res.data)
+                navigate("/profile") 
                 } catch (err) {
                     if (axios.isAxiosError(err)) {
                         console.log("❌ Ошибка от API:", err.response?.data)
@@ -53,7 +56,7 @@ export default function SubmitApplication() {
                         />
                 </div>
                 <div className="mb-4">
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-700">Дата рождения</label>
                     <input 
                         type="date" 
                         id="date" 

@@ -8,6 +8,7 @@ import ProfilePage from './pages/ProfilePge'
 import Navbar from './components/Navbar'
 import './App.css'
 import PrivateRoute from './components/PrivateRoute'
+import RegisterPage from './pages/RegisterPage'
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Route path="/" element={
           <PrivateRoute><Home/></PrivateRoute>} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<RegisterPage />} />
         <Route path="/profile" element={
           <PrivateRoute><ProfilePage /></PrivateRoute>
         } />

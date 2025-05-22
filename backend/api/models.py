@@ -19,7 +19,7 @@ class Application(models.Model):
         ('rejected', 'Отклонён'),
     ]
     
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     full_name = models.CharField(max_length=100)
     birth_date = models.DateField()
     ege_score = models.PositiveIntegerField()

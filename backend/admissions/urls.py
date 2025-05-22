@@ -15,13 +15,20 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.http import HttpResponse
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+from api.views import get_user_applications
+
+def debug_view(request):
+    return HttpResponse("DEBUG WORKING!", status=200)
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
+    path('api/applications/my/', get_user_applications),
     path('api/auth/', include('djoser.urls')),  # регистрация и др.
     path('api/auth/', include('djoser.urls.jwt')),  # JWT
 ]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
