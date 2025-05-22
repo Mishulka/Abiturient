@@ -13,6 +13,7 @@ User = get_user_model()
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_user_applications(request):
+    print("=== DEBUG: View вызван ===")
     applications = Application.objects.filter(user=request.user)
     serializer = ApplicationSerializer(applications, many=True)
     if not request.user.is_authenticated:

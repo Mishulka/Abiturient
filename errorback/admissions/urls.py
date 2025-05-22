@@ -25,6 +25,12 @@ from api.views import get_user_applications
 def debug_view(request):
     return HttpResponse("DEBUG WORKING!", status=200)
 
+print("\n=== DEBUG URL CONFIG ===")
+print("Проверяемые пути:")
+print("1. /api/applications/my/ ->", get_user_applications)
+print("2. /api/ ->", include('api.urls'))
+print("\n")
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),

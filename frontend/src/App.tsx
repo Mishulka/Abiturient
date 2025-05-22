@@ -16,6 +16,7 @@ function App() {
   return (
     <>
       <Navbar />
+      <div id='main'>
       <Routes>
         <Route path="/" element={
           <PrivateRoute><Home/></PrivateRoute>} />
@@ -27,6 +28,7 @@ function App() {
         <Route path="/submitApplication" element={
           <PrivateRoute><SubmitApplication/></PrivateRoute>} />
       </Routes>
+      </div>
     </>
   )
 }

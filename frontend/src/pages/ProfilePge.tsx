@@ -5,9 +5,14 @@ import axios from "axios"
 
 type Application = {
   id: number
-  date: string
-  file_url: string
+  full_name: string
+  birth_date: string
+  ege_score: number
+  passport_scan: string
+  status: string
+  created_at: string
 }
+
 
 const ProfilePage = observer(() => {
   const [applications, setApplications] = useState<Application[]>([])
@@ -16,12 +21,13 @@ const ProfilePage = observer(() => {
     const fetchApplications = async () => {
       try {
         console.log("Токен:", userStore.accessToken);
-        const res = await axios.get("http://localhost:8000/api/applications/my/", {
+        const res = await axios.get("http://localhost:8000/api/getapp/", {
           headers: {
             Authorization: `Bearer ${userStore.accessToken?.trim()}`,
           },
         })
         setApplications(res.data)
+        console.log(res.data)
       } catch (error) {
         console.error("Ошибка при получении заявок", error)
       }
@@ -32,25 +38,32 @@ const ProfilePage = observer(() => {
     }
   }, [userStore.accessToken])
 
-  if (!userStore.userInfo) return <div>Загрузка...</div>
+  // if (!userStore.userInfo) return <div>Загрузка...</div>
 
   return (
     <div>
-      <h1>Профиль</h1>
-      <p><strong>Пользователь:</strong> {userStore.userInfo.username}</p>
+          <h2>Ваши заявки</h2>
+    {applications.length === 0 ? (
+      <p>У вас пока нет заявок.</p>
+    ) : (
+      <ul>
+        {applications.map((app) => (
+          <li key={app.id}>
+            <p><strong>ФИО:</strong> {app.full_name}</p>
+            <p><strong>Дата рождения:</strong> {new Date(app.birth_date).toLocaleDateString()}</p>
+            <p><strong>Баллы ЕГЭ:</strong> {app.ege_score}</p>
+            <p><strong>Статус:</strong> {app.status}</p>
+            <p>
+              📎 <a href={`http://localhost:8000${app.passport_scan}`} target="_blank" rel="noopener noreferrer">
+                Паспорт
+              </a>
+            </p>
+            <hr />
+          </li>
+        ))}
+      </ul>
+    )}
 
-      <h2>Ваши заявки</h2>
-      {applications.length === 0 ? (
-        <p>У вас пока нет заявок.</p>
-      ) : (
-        <ul>
-          {applications.map((app) => (
-            <li key={app.id}>
-              📄 <a href={app.file_url} target="_blank" rel="noopener noreferrer">Файл</a> – {new Date(app.date).toLocaleDateString()}
-            </li>
-          ))}
-        </ul>
-      )}
     </div>
   )
 })
