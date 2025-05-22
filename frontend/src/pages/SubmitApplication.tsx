@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { userStore } from "../store/user"
 
 export default function SubmitApplication() {
     const [fullName, setFullName] = useState("");
@@ -16,7 +17,7 @@ export default function SubmitApplication() {
         if (passport) {
             formData.append("passport_scan", passport);
 
-            const token = localStorage.getItem("access");
+            const token = userStore.accessToken
             try {
                 const res = await axios.post("http://127.0.0.1:8000/api/applications/", formData, {
                     headers: {

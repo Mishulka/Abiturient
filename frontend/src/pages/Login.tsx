@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { login, getMe } from "../api/auth"
 import { useNavigate } from "react-router-dom"
+import { userStore } from "../store/user"
 
 export default function LoginPage() {
   const [username, setUsername] = useState("")
@@ -10,10 +11,14 @@ export default function LoginPage() {
   const handleLogin = async (event: React.FormEvent) => {
     event.preventDefault()
     const res = await login({ username, password })
-    localStorage.setItem("access", res.data.access)
-    
-    const me = await getMe(res.data.access)
+    const token = res.data.access
+    // вместо localStorage.setItem
+    userStore.setAccessToken(token)
+
+    const me = await getMe(token)
+    userStore.setUserInfo(me.data)
     console.log("Вы вошли как:", me.data)
+
     navigate("/submitApplication")
   }
 

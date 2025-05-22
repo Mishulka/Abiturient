@@ -3,9 +3,12 @@ import { Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import SubmitApplication from './pages/SubmitApplication'
+import ProfilePage from './pages/ProfilePge'
 //components
 import Navbar from './components/Navbar'
 import './App.css'
+import PrivateRoute from './components/PrivateRoute'
+
 
 function App() {
 
@@ -13,9 +16,14 @@ function App() {
     <>
       <Navbar />
       <Routes>
-        <Route path="/home" element={<Home />} />
-        <Route path="/" element={<Login />} />
-        <Route path="/submitApplication" element={<SubmitApplication/>} />
+        <Route path="/" element={
+          <PrivateRoute><Home/></PrivateRoute>} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/profile" element={
+          <PrivateRoute><ProfilePage /></PrivateRoute>
+        } />
+        <Route path="/submitApplication" element={
+          <PrivateRoute><SubmitApplication/></PrivateRoute>} />
       </Routes>
     </>
   )
