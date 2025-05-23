@@ -22,7 +22,7 @@ export default function LoginPage() {
 
       setError("") // сброс ошибки при успехе
       navigate("/submitApplication")
-    } catch (err: any) {
+    } catch (err) {
       setError("Неверное имя пользователя или пароль")
       console.error(err)
     }

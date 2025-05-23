@@ -5,7 +5,7 @@ import Login from './pages/Login'
 import SubmitApplication from './pages/SubmitApplication'
 import ProfilePage from './pages/ProfilePge'
 //components
-import Navbar from './components/Navbar'
+import Navbar from './components/Navbar/Navbar'
 import './App.css'
 import PrivateRoute from './components/PrivateRoute'
 import RegisterPage from './pages/RegisterPage'

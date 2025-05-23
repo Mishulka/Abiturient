@@ -17,6 +17,28 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Корневой контейнер */
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-width: 100vw;
+}
+
+/* Навигация фиксированной высоты */
+nav {
+  height: 60px; /* Пример */
+  background-color: #f5f5f5;
+}
+
+
 a {
   font-weight: 500;
   color: #646cff;

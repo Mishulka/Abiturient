@@ -20,6 +20,17 @@ def get_user_applications(request):
         return Response({"error": "Not authenticated"}, status=401)
     return Response(serializer.data)
 
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def delete_application(request, pk):
+    try:
+        app = Application.objects.get(pk=pk, user=request.user)
+        app.delete()
+        return Response({'success': True})
+    except Application.DoesNotExist:
+        return Response({'error': 'Not found'}, status=404)
+
+
 @api_view(['POST'])
 def register(request):
     username = request.data.get('username')
