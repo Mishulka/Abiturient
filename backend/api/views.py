@@ -1,14 +1,22 @@
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from .models import Application
-from .serializers import ApplicationSerializer
+from .models import Application, Institution
+from .serializers import ApplicationSerializer, InstitutionSerializer
 from rest_framework import viewsets
 from rest_framework import status
 from rest_framework import permissions
 from django.contrib.auth import get_user_model  # Option 1
 User = get_user_model()
 
+
+# views.py
+@api_view(['GET'])
+@permission_classes([permissions.AllowAny])
+def get_institutions(request):
+    institutions = Institution.objects.all()
+    serializer = InstitutionSerializer(institutions, many=True)
+    return Response(serializer.data)
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])

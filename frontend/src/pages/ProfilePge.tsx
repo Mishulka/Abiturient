@@ -18,6 +18,7 @@ type Application = {
 
 const ProfilePage = observer(() => {
   const [applications, setApplications] = useState<Application[]>([])
+  
 
   const fetchApplications = async () => {
     try {
