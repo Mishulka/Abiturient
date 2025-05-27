@@ -1,6 +1,6 @@
 .navbar {
   background-color: #f8f8f8;
-  padding: 1rem 2rem;
+  padding: 1rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   position: sticky;
   top: 0;
@@ -13,11 +13,23 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .navbar-logo {
   font-weight: bold;
   font-size: 1.2rem;
+}
+
+@media (max-width: 800px) {
+  .navbar-logo {
+    font-size: 1rem;
+  }
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
 }
 
 .navbar-links a {
@@ -34,4 +46,29 @@
 .navbar-links .active {
   font-weight: bold;
   color: #007bff;
+}
+
+.burger {
+  display: none;
+  font-size: 1rem;
+  cursor: pointer
+}
+
+@media (max-width: 800px) {
+  .burger {
+    display: block;
+  }
+
+  .navbar-links {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    margin-top: 1rem;
+  }
+
+  .navbar-links.open {
+    display: flex;
+    background-color: #f8f8f8;
+    height: 100vh;
+  }
 }

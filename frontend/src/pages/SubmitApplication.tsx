@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { userStore } from "../store/user"
 import { useNavigate } from "react-router-dom"
+import { toast } from 'react-toastify';
 
 export default function SubmitApplication() {
     const [fullName, setFullName] = useState("");
@@ -41,13 +42,15 @@ export default function SubmitApplication() {
                     "Content-Type": "multipart/form-data",
                     }
                 })
-                console.log("Создана заявка:", res.data)
+                toast.success("Заявка успешно отправлена!");
                 navigate("/profile") 
                 } catch (err) {
                     if (axios.isAxiosError(err)) {
                         console.log("❌ Ошибка от API:", err.response?.data)
+                        toast.error("Ошибка при отправке заявки");
                     }else {
                     console.log("❌ Ошибка:", err)
+                    toast.error("Ошибка при отправке заявки");
                 }
             }
 
@@ -56,7 +59,7 @@ export default function SubmitApplication() {
 
     return (
         <div className="p-4">
-            <h1 className="text-2xl font-bold mb-4">Подать заявку</h1>
+            <h1 className="text-1xl font-bold mb-4">Подать заявку</h1>
             <form onSubmit={handleSubmit}>
                 <div className="mb-2">
                     <label htmlFor="institution" className="block text-sm font-medium text-gray-700">Учреждение</label>
@@ -76,7 +79,7 @@ export default function SubmitApplication() {
                     </div>
 
                 <div className="mb-2">
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700">Имя</label>
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-700">ФИО</label>
                     <input 
                         type="text" 
                         id="name" 
@@ -128,11 +131,12 @@ export default function SubmitApplication() {
                         />
                     </label>
                     </div>
-
+                
                 <button 
                     type="submit" 
                     className="bg-blue-500 text-white px-4 py-2 rounded-md"
-                    >Отправить</button>
+                    >Отправить
+                </button>
             </form>
         </div>
     )

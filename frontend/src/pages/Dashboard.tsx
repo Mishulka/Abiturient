@@ -5,6 +5,7 @@ import { observer } from "mobx-react-lite"
 import { userStore } from "../store/user"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
+import { DragAndDropList } from "../components/DnDList/DnDlist"
 
 type Application = {
   id: number
@@ -34,6 +35,7 @@ export default observer(function Dashboard() {
 
   return (
     <div className="p-4">
+      
       <h1 className="text-2xl font-bold mb-4">Мои заявки</h1>
       <div className="space-y-2">
         {applications.map(app => (
@@ -45,6 +47,8 @@ export default observer(function Dashboard() {
           </div>
         ))}
       </div>
+
+        
     </div>
   )
 })

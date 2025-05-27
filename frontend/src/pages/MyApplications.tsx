@@ -16,7 +16,7 @@ type Application = {
   created_at: string
 }
 
-const ProfilePage = observer(() => {
+const MyApplications = observer(() => {
   const [applications, setApplications] = useState<Application[]>([])
   
 
@@ -58,11 +58,11 @@ const ProfilePage = observer(() => {
   const getStatusColor = (status: string) => {
     switch (status) {
       case "new":
-        return "bg-blue-600 rounded-4xl text-white";
-      case "approved":
-        return "bg-green-600 rounded-4xl text-white";
+        return "bg-blue-200 rounded-4xl text-blue-700 font-bold px-2";
+      case "accepted":
+        return "bg-green-200 rounded-4xl text-green-700 font-bold px-2";
       case "rejected":
-        return "bg-red-600 rounded-4xl text-white";
+        return "bg-red-200 rounded-4xl text-red-700 font-bold px-2";
       default:
         return "text-gray-600";
     }
@@ -72,7 +72,7 @@ const ProfilePage = observer(() => {
   return (
     <>
       <h2 className="text-2xl font-bold mb-4 text-center">Ваши заявки</h2>
-      <div className="max-w-4xl mx-auto p-4">
+      <div className="mx-auto p-4">
         {applications.length === 0 ? (
           <div className="text-center">
             <p className="text-gray-600 mb-2">У вас пока нет заявок.</p>
@@ -88,7 +88,11 @@ const ProfilePage = observer(() => {
             {applications.map((app) => (
               <div
                 key={app.id}
-                className="border rounded-lg p-4 shadow-sm bg-white flex gap-4 md:flex-row justify-between gap-4 min-w-80 "
+                className="
+                border rounded-lg 
+                p-4 shadow-sm bg-white flex gap-4 
+                md:flex-row justify-between gap-4 min-w-80 
+                border-slate-100"
               >
                 <div className="text-left">
                 <p><strong>ФИО:</strong> {app.full_name}</p>
@@ -114,7 +118,9 @@ const ProfilePage = observer(() => {
 
                   <button
                     onClick={() => handleDelete(app.id)}
-                    className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded"
+                    className="bg-red-500 hover:bg-red-600 
+                    text-white px-3 py-1 rounded
+                    flex items-center justify-center"
                   >
                     <img src={trashIcon} alt="удалить"/>
                   </button>
@@ -129,4 +135,4 @@ const ProfilePage = observer(() => {
   )
 })
 
-export default ProfilePage
+export default MyApplications

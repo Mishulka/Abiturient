@@ -1,5 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
+import { DragAndDropList } from "../components/DnDList/DnDlist"
 
 type Institution = {
   id: number
@@ -21,6 +22,11 @@ export default function Home() {
   return (
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-4">Учебные учреждения</h1>
+      {/* <p>dnd</p>
+        
+      <div style={{ border: "1px solid red", padding: "20px" }}>
+        <DragAndDropList />
+      </div> */} 
       <div className="space-y-4">
         {institutions.map((inst) => (
           <div
